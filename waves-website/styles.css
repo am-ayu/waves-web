@@ -1,0 +1,360 @@
+/* ===== Ocean Dusk Theme (Waves) ===== */
+:root{
+  --page-max: 1000px;
+  --gap: 20px;                 /* slide gap; keep in sync with JS GAP_PX (~20) */
+  --accent: #5b7cfa;
+  --text: #0e1222;
+  --bg1:#0d1b3d;               /* deep blue */
+  --bg2:#1a274d;
+  --bg3:#f7d0e4;               /* dusk pink */
+  --card:#ffffff;
+  --caption:#333a55;
+}
+
+*{ box-sizing:border-box; }
+html, body {
+  min-height: 100%;
+  height: auto;   /* let the page grow */
+  margin: 0;
+}
+
+
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+  background-attachment: fixed;
+}
+
+/* ===== Header / Title ===== */
+h1{
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+  margin: 1.25rem 0 .25rem;
+  color: #f2f4ff;
+}
+
+.tagline{
+  text-align: center;
+  color: #d9def7;
+  margin: 0 0 1rem;
+}
+
+/* ===== Carousel Section ===== */
+.carousel-section{
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.carousel{
+  position: relative;
+  width: min(var(--page-max), 95vw);
+  margin-inline: auto;
+  overflow: visible;           /* let side slides peek */
+}
+
+/* Prev/Next buttons */
+.nav{
+  position: absolute;
+  top: 50px;
+  transform: translateY(-50%);
+  border: 0;
+  background: rgba(255,255,255,.9);
+  width: 42px; height: 42px; border-radius: 50%;
+  font-size: 24px; line-height: 42px; text-align: center; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  z-index: 3;
+}
+.nav:focus{ outline: 3px solid var(--accent); outline-offset: 2px; }
+.prev{ left: -14px; }
+.next{ right: -14px; }
+
+
+/* Two title images under the header */
+.titles {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;                 /* space between the images */
+  max-width: 90%;            /* keeps them 2 inches or so away from the sides */
+  margin: 2rem auto;         /* centers the block */
+}
+
+.title-image img {
+  height: 400px;          /* same height for both */
+  width: auto;            /* keep proportions */
+  object-fit: contain;    /* shows the whole image, no cropping */
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+
+/* Slide track row */
+.track{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  transition: transform 500ms ease;
+  max-height: 420px;           /* keeps it modest in height */
+}
+
+/* Each slide: 70% width so neighbors peek */
+.slide{
+  flex: 0 0 80%;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 10px 30px rgba(10, 15, 40, .35);
+  transform: scale(.96);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.slide.current{ transform: scale(1.02); }
+
+.slide a{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.slide img{
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+.slide figcaption{
+  padding: .6rem .9rem .9rem;
+  font-size: .95rem;
+  color: var(--caption);
+  align-items: center;
+}
+
+/* Hover pause + gentle zoom of the CENTER slide */
+.carousel:hover .slide.current{
+  transform: scale(1.10);
+  box-shadow: 0 20px 40px rgba(10,15,40,.5);
+  transition: transform 500ms ease, box-shadow 500ms ease;
+
+}
+
+/* ===== Summary card below carousel ===== */
+.background{
+  width: min(var(--page-max), 90vw);
+  margin: 1.5rem auto 3rem;
+  background: rgba(3, 45, 180, .09);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+.background h2,.background h3{
+  font-family: "Playfair Display", serif;
+  margin-top: .4rem;
+  font-size: xx-large;
+  color: #f2f4ff;
+}
+
+
+/* Smooth anchor scrolling */
+html { scroll-behavior: smooth; }
+
+/* Back link style (optional) */
+.back-link {
+  display: inline-block;
+  margin: 0 1rem 0 1rem;
+  color: #cfd6ff;
+  text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* Sticky sub-nav */
+.clip-subnav {
+  position: sticky;
+  top: 0;                    /* raise if you have a sticky site header */
+  z-index: 20;
+  display: flex;
+  gap: 1rem;
+  padding: .75rem 1rem;
+  background: rgba(10, 20, 40, 0.75);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.clip-subnav a {
+  color: #e9ecff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.clip-subnav a:hover { text-decoration: underline; }
+
+/* Framed video */
+.video-wrap {
+  max-width: 1100px;
+  margin: 1.25rem auto 2rem;
+  padding: 0 1rem;
+}
+.video-frame {
+  background: #0b1226;       /* frame color */
+  padding: 18px;             /* frame thickness */
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.video-inner {
+  aspect-ratio: 16 / 9;
+  background: #000;          /* matte */
+  border-radius: 10px;
+  overflow: hidden;
+}
+.video-inner video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       /* full image visible, no cropping */
+  display: block;
+}
+.video-caption {
+  text-align: center;
+  color: #dfe4ff;
+  margin-top: .5rem;
+  font-size: .95rem;
+  opacity: .85;
+}
+
+/* Content sections */
+.clip-section {
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark background */
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+ul li {
+  margin-bottom: 10px; /* Adjust the value as needed */
+  color: #ffffff;
+
+}
+
+.clip-section h2, .clip-section h3{
+  margin: 0 0 .5rem;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  color: #ffffff;
+}
+.clip-section p { line-height: 1.6;   color: #fdfdfd;
+}
+
+#impact {
+  font-size: 1.25rem;   /* base size for the section */
+  line-height: 1.65;
+}
+
+#impact ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 0;
+}
+
+#impact li {
+  font-size: 1.35rem;   /* bump bullets a bit more */
+  margin-bottom: 0.8rem;
+}
+
+#impact li::marker {
+  font-size: 1.6rem;    /* larger bullet dot */
+}
+
+#close-read {
+  font-size: 1.25rem;   /* base size for the section */
+  line-height: 1.65;
+}
+
+
+#close-read ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 0;
+}
+
+
+#close-read li {
+  font-size: 1.35rem;   /* bump bullets a bit more */
+  margin-bottom: 0.8rem;
+}
+
+
+#close-read li::marker {
+  font-size: 1.6rem;    /* larger bullet dot */
+}
+
+
+body {
+  padding-bottom: 200vh; /* creates scroll space */
+}
+
+.connection{
+  width: min(var(--page-max), 90vw);
+  margin: 1.5rem auto 3rem;
+  background: rgba(3, 45, 180, .09);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 3rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+
+
+.connection h2, .connection h3, .connection p{
+  font-family: "Playfair Display", serif;
+  margin-top: .4rem;
+  color: white;
+  font-size: x-large;
+}
+
+.connection ul {
+  margin-left: 1.5rem; /* adds space so bullets don't overlap */
+  font-size: 1.25rem;
+}
+
+.connection li {
+  font-size: 1.25rem; /* increase text size (20px-ish) */
+  color: white;       /* match your current style */
+  margin-bottom: 0.75rem; /* space between bullets */
+  font-family: "Playfair Display", serif;
+
+}
+
+.connection li::marker {
+  font-size: 1.5rem;  /* makes the actual bullet dot bigger */
+}
+
+
+/* ===== Audio list (stacked figures, smaller width) ===== */
+.audio-list{
+  width: min(420px, 92vw);
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;     /* stack vertically */
+  gap: 1rem;
+}
+.audio-list figure{ margin: 0; background: rgba(255,255,255,.9); border-radius: 12px; padding: .75rem; }
+.audio-list figcaption{ font-size: .95rem; color: var(--caption); margin-bottom: .4rem; align-items: center;}
+.audio-list audio{ width: 100%; }
+
+/* ===== Back link for clip pages ===== */
+.back-link{
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.back-link:focus, .back-link:hover{ text-decoration: underline; }
+
+/* ===== Visually hidden utility ===== */
+.visually-hidden{
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); overflow: hidden;
+}
+
+/* ===== Motion preferences ===== */
+@media (prefers-reduced-motion: reduce){
+  .track, .slide{ transition: none; }
+}
